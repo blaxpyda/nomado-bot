@@ -1,0 +1,12 @@
+langgraph
+langchain-groq
+langsmith
+typing-extensions
+fastapi[standard]
+uvicorn
+langchain
+langchain-tavily
+python-dotenv
+langgraph-prebuilt
+langgraph-supervisor
+langchain-core

@@ -1,0 +1,10 @@
+{
+    "dependencies": [
+        "langchain_groq",
+        "./app"
+    ],
+    "graphs": {
+        "my_agent": "./app/agent.py:agent"
+    },
+    "env": "./.env"
+}
