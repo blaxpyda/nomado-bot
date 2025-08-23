@@ -21,12 +21,12 @@ query_api_agent = create_react_agent(
         Instructions:
          - Assist user in finding the best flight options based on their preferences.
          - You are to use the `missing_params` tool to identify any missing parameters. 
-         - Build a JSON object with the flight search parameters that is
-           - origin: IATA code of the departure airport
-           - destination: IATA code of the arrival airport
-           - depart_date: Date of departure
-           - return_date: This can be optional for one way flights.
-         - You are to use the `get_cheap_flights` tool to find the best flight options.
+         - Build a JSON object with the flight search parameters for example
+           {
+           "origin":"MOW","destination":"HKT","depart_date":"2019-11","return_date":"2019-12"
+           }
+         - If some parameters are still missing, prompt the user to get more context
+         - You are to use the `get_cheap_flights` tool and the JSON object to find the best flight options.
         '''
     ),
     name = "query_api_agent",
