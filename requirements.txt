@@ -10,3 +10,5 @@ python-dotenv
 langgraph-prebuilt
 langgraph-supervisor
 langchain-core
+streamlit
+requests

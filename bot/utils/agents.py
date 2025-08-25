@@ -1,4 +1,4 @@
-from tools import missing_params, get_cheap_flights
+from .tools import missing_params, get_cheap_flights, make_booking, create_handoff_tool
 from langgraph.prebuilt import create_react_agent
 import getpass
 import os
@@ -29,11 +29,46 @@ query_api_agent = create_react_agent(
          - You are to use the `get_cheap_flights` tool and the JSON object to find the best flight options.
         '''
     ),
-    name = "query_api_agent",
+    name="query_api_agent",
 )
 
-if __name__ == "__main__":
-    query = "Find me a flight from NYC to LAX departing on 2024-12-20 and returning on 2024-12-30."
-    response = query_api_agent.invoke({"input": query})
-    print(response)
+make_booking_agent = create_react_agent(
+   model=model,
+   tools=[make_booking],
+   prompt=(
+      '''
+      You are a travel agent helping users book flights.
+      Instructions:
+       - Assist user in booking flights based on their preferences.
+       - You are to use the `make_booking` tool to finalize the booking.
+       - For purposes of this simulation, you can assume the booking is successful and returns some arbitrary results and a booking link
+      '''
+   ),
+   name="make_booking_agent"
+)
+
+#Handoffs
+assign_to_query_api_agent = create_handoff_tool(
+    agent_name="query_api_agent",
+    description="Use this tool to handoff to the flight search agent"
+)
+
+assign_to_make_booking_agent = create_handoff_tool(
+    agent_name="make_booking_agent",
+    description="Use this tool to handoff to the flight booking agent"
+)
+
+# The supervisor
+supervisor_agent = create_react_agent(
+  model=model,
+  tools=[assign_to_query_api_agent, assign_to_make_booking_agent],
+  prompt=(
+    '''
+    You are a supervisor agent overseeing flight search and booking agents.
+    Instructions:
+     - Use the appropriate handoff tool to delegate tasks to the flight search or booking agent.
+    '''
+  ),
+  name="supervisor_agent"
+)
 

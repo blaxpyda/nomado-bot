@@ -1,4 +1,8 @@
-from langchain_core.tools import tool
+from langchain_core.tools import tool, InjectedToolCallId
+from langgraph.prebuilt import InjectedState
+from langgraph.graph import MessagesState
+from langgraph.types import Command
+from typing import Annotated
 import requests
 import os
 
@@ -12,7 +16,7 @@ def missing_params(**kwargs):
     return missing
 
 @tool
-def get_cheap_flights(origin, destination, depart_date, return_date, token):
+def get_cheap_flights(origin, destination, depart_date, return_date):
     """
     Get cheap flight options from the TravelPayouts API.
     """
@@ -44,3 +48,33 @@ def get_cheap_flights(origin, destination, depart_date, return_date, token):
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
         return None
+    
+@tool
+def make_booking(origin, destination, depart_date, return_date):
+    '''
+    Make a flight booking. Returns a simple booking link
+    '''
+    pass
+
+def create_handoff_tool(*, agent_name: str, description: str | None=None):
+    name = f"handoff_to_{agent_name}"
+    description = description or f"Use this tool to handoff to the {agent_name}"
+
+    @tool(name, description=description)
+    def handoff_tool(
+        state: Annotated[MessagesState, InjectedState],
+        tool_call_id: Annotated[str, InjectedToolCallId],
+    ) -> Command:
+        tool_message = {
+            "role": "tool",
+            "content": f"Handing off to {agent_name} agent.",
+            "name": name,
+            "tool_call_id": tool_call_id
+        }
+        return Command(
+            goto=agent_name,
+            update={**state, "messages": state["messages"] + [tool_message]},
+            graph=Command.PARENT,
+        )
+    return handoff_tool
+
