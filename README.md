@@ -72,6 +72,10 @@ The API will be available at `http://127.0.0.1:8000`. Access the interactive doc
 
 
 ## Project Structure
+```
+
+
+```
 
 ## Contributing
 1. Fork the repo.
@@ -81,6 +85,9 @@ The API will be available at `http://127.0.0.1:8000`. Access the interactive doc
 5. Open a Pull Request.
 
 We welcome improvements, such as adding error handling, caching, or support for more Travelpayouts endpoints.
+
+## To try out our staged solution
+Visit: http://thugtheory.tech:8501/
 
 ## License
 MIT License. See [LICENSE](LICENSE) for details.
