@@ -2,20 +2,20 @@ services:
   #Backend - FastAPI application
   backend:
     build:
-      context: ./bot
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.bot
 
-  ports:
-    - "8060:80"
+    ports:
+      - "8060:80"
 
-  expose:
-    - "80"
+    expose:
+      - "80"
 
   #Frontend - Streamlit application
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.frontend
     ports:
       - "8501:8501"
 
