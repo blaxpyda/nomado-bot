@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import json
 from dotenv import load_dotenv
 import os
 
@@ -22,6 +21,7 @@ def send_message(message):
         )
         response.raise_for_status()
         data = response.json()
+        st.write("DEBUG BACKEND RAW:", data)
         return data.get("response", "No response from server.")
     except requests.exceptions.RequestException as e:
         st.error(f"Error: {e}")

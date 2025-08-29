@@ -13,8 +13,3 @@ supervisor = (
     .add_edge("make_booking_agent", "supervisor_agent")
     .compile()
 )
-
-if __name__ == "__main__":
-    initial_input = "I want to book a flight from NYC to LAX."
-    response = supervisor.invoke({"input": initial_input})
-    print(response)

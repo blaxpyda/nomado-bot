@@ -1,0 +1,30 @@
+services:
+  #Backend - FastAPI application
+  backend:
+    build:
+      context: ./bot
+      dockerfile: Dockerfile
+
+  ports:
+    - "8060:80"
+
+  expose:
+    - "80"
+
+  #Frontend - Streamlit application
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+
+    environment:
+      - BACKEND_URL=http://backend:80
+
+    depends_on:
+      - backend
+
+networks:
+  default:
+    driver: bridge

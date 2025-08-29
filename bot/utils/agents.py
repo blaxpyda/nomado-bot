@@ -1,11 +1,11 @@
 from .tools import missing_params, get_cheap_flights, make_booking, create_handoff_tool
 from langgraph.prebuilt import create_react_agent
-import getpass
+from dotenv import load_dotenv
 import os
 
+load_dotenv() 
 
-if not os.environ.get("GROQ_API_KEY"):
-  os.environ["GROQ_API_KEY"] = getpass.getpass("Enter API key for Groq: ")
+os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
 
 from langchain.chat_models import init_chat_model
 

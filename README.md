@@ -5,7 +5,7 @@
 
 
 ## Overview
-This project is a FasrAPI-based booking agebt designed to assist users in searching for and booking travel options, including flights, hotels and destinations. It integrates with the Travelpayouts API to fetch real-time data on flight prices, hotel availability, popular destinations, and more. The agent acts as an intermediary, querying the Travelpayouts endpoints to retrieve options and presenting them to the user for selection. For bookings, the API generates affiliate booking links.
+This project is a FastAPI-based booking agent designed to assist users in searching for and booking travel options, including flights, hotels and destinations. It integrates with the Travelpayouts API to fetch real-time data on flight prices, hotel availability, popular destinations, and more. The agent acts as an intermediary, querying the Travelpayouts endpoints to retrieve options and presenting them to the user for selection. For bookings, the API generates affiliate booking links.
 
 **Key Features:**
 - Search for flights by origin, destination, dates, and filters (e.g., cheapest tickets, non-stop).

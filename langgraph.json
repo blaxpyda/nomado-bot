@@ -4,7 +4,7 @@
         "./app"
     ],
     "graphs": {
-        "my_agent": "./app/agent.py:agent"
+        "my_agent": "./bot/agent.py:agent"
     },
     "env": "./.env"
 }
