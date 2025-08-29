@@ -10,6 +10,9 @@ services:
 
     environment:
       - GROQ_API_KEY=${GROQ_API_KEY}
+      - LANGSMITH_API_KEY=${LANGSMITH_API_KEY}
+      - TRAVEL_PAYOUTS_API_KEY=${TRAVEL_PAYOUTS_API_KEY}
+      - BACKEND_URL=http://backend:80
 
     expose:
       - "80"
