@@ -5,7 +5,9 @@
 
 
 ## Overview
-This project is a FastAPI-based booking agent designed to assist users in searching for and booking travel options, including flights, hotels and destinations. It integrates with the Travelpayouts API to fetch real-time data on flight prices, hotel availability, popular destinations, and more. The agent acts as an intermediary, querying the Travelpayouts endpoints to retrieve options and presenting them to the user for selection. For bookings, the API generates affiliate booking links.
+This project is a FastAPI-based booking agent designed to assist users in searching for and booking travel options, including flights, hotels and destinations. It integrates with the Travelpayouts API to fetch real-time data on flight prices, hotel availability, popular destinations, and more. The agent acts as intermediary. 1 agent does the work 
+of searching for travel options at aviasales. This agent returns data to the user in a conversational way. The user can go ahead and make a booking at the same sight.
+Its a multiagent architectures that use two agents, a search and a booker. These are all managed by a supervisor.
 
 **Key Features:**
 - Search for flights by origin, destination, dates, and filters (e.g., cheapest tickets, non-stop).
@@ -56,22 +58,49 @@ The API will be available at `http://127.0.0.1:8000`. Access the interactive doc
 ### Example Workflow
 1. User queries the chatbot about travel plans.
 2. Bot intuitively asks a user various questions about his travel plans as it builds a perfect json payload to query the API.
-3. Bot sends payload through a GET request and is returned data about a travel option
+3. Bot uses a selenium tool to query an `aviasales` endpoint 
 4. Bot receives data and renders to the user some of the options
 5. User chooses among the travel options returned
 6. Bot confirms if it can continue with the booking 
 7. Bot returns a link to book the chosen travel option
 8. User clicks on the link and books the travel option
 
-## API Endpoints
+
 
 ## Configurations
-- **API Token**: Loaded from `.env`. All requests to Travelpayouts include `X-Access-Token` header.
-- **Rate Limits**: Travelpayouts enforces limits (e.g., 200 searches/hour per IP for flight searches). Handle errors gracefully in production.
 - **Currencies & Locales**: Defaults to USD and English.
 
 
 ## Project Structure
+```
+```
+nomado-bot/
+├── README.md
+├── usecase.md
+├── langgraph.json
+├── requirements.txt
+├── pyproject.toml
+├── uv.lock
+├── .env
+├── docker-compose.yaml
+├── Dockerfile.bot
+├── Dockerfile.frontend
+├── bot/
+│   ├── __pycache__
+|   ├── main.py
+|   ├── screenshots
+|   └── utils
+|        ├── __pycache__
+|        ├── agents.py
+|        ├── graph.py
+|        └── tools.py
+│   
+├── frontend/
+│   └── main.py
+│   
+└── tests/
+   ├── __pycache__
+   └── TBD
 ```
 
 
